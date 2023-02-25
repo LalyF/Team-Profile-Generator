@@ -1,0 +1,140 @@
+async function promptAddMember() {
+    return inquirer.prompt([
+      {
+        type: 'list',
+        name: 'type',
+        message: 'What type of team member would you like to add?',
+        choices: ['Add an Engineer', 'Add an Intern', 'Finish building the team']
+      }
+    ]);
+  }
+
+//   // Function to prompt user for engineer information
+ async function promptEngineer() {
+    return inquirer.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What is the engineer\'s name?'
+      },
+      {
+        type: 'input',
+        name: 'id',
+        message: 'What is the engineer\'s employee ID?'
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'What is the engineer\'s email address?'
+      },
+      {
+        type: 'input',
+        name: 'github',
+        message: 'What is the engineer\'s GitHub username?'
+      }
+    ]);
+  }
+  
+//   // Function to prompt user for intern information
+ async function promptIntern() {
+    return inquirer.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What is the intern\'s name?'
+      },
+      {
+        type: 'input',
+        name: 'id',
+        message: 'What is the intern\'s employee ID?'
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'What is the intern\'s email address?'
+      },
+      {
+        type: 'input',
+        name: 'school',
+        message: 'What school is the intern attending?'
+      }
+    ]);
+  }
+  
+//   // Function to prompt user for additional team member information
+  
+//   // Function to create Manager object and add it to the teamMembers array
+//   async function addManager() {
+//     const managerAnswers = await promptManager();
+//     const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber);
+//     team.push(manager);
+//   }
+  
+//   Function to create Engineer object and add it to the team array
+  async function addEngineer() {
+    const engineerAnswers = await promptEngineer();
+    const engineer = new Engineer(engineerAnswers.name, engineerAnswers.id, engineerAnswers.email, engineerAnswers.github);
+    console.log('Adding an Engineer');
+    team.push(engineer);
+  }
+  
+//   // Function to create Intern object and add it to the teamMembers array
+  async function addIntern() {
+    const internAnswers = await promptIntern();
+    const intern = new Intern(internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.school);
+    team.push(intern);
+  }
+  
+//   .then(answer => {
+//     if (answer.type === 'Engineer') {
+//       addEngineer();
+//       console.log('Adding an Engineer');
+//     } else if (answer.type === 'Intern') {
+//       addIntern();
+//       console.log('Adding an Intern');
+//     } else {
+//       // code to finish building the team
+//      return 0;
+//     }
+//   });
+// // console.log(answer);
+   
+   
+//     let engineer= new Engineer("Andrew",55,"jbhjfbgj@gh.com","hjh")
+//      engineer.getRole();
+//      let engineer1= new Engineer("alb",55,"hgvgh@gh.com","hjh")
+//      engineer1.getRole();
+//    let manager=new Manager("laly",56,"jsj@hjgjh.com",8566552)
+//      let mn=manager.getRole();
+//    let intern=new Intern("jhjbhj",57,"jhj@hjgjh.com","srse school")
+//      let int=intern.getRole();
+// team.push(engineer);
+
+// team.push(manager);
+// team.push(intern)
+// team.push(engineer1);
+// // team.push(new Engineer("jhjhj",55,"hjjhj@gh.com","jhj"));
+// // team.push(new Engineer("hbhhj",55,"bjhbj@gh.com","bjhh"));
+
+
+// // // team.push(role);
+// console.log(team);
+
+const { name, id, email, officeNumber } = await promptManager();
+    const manager = new Manager(name, id, email, officeNumber);
+team.push(manager);
+do{
+let c=await promptAddMember();
+if(c.type==='Add an Engineer'){
+    await addEngineer();
+    await promptAddMember();
+}
+else if(c.type==='Add an Intern'){
+    await addIntern();
+    await promptAddMember();
+}
+else {
+    console.log("This is your team" )
+    return 0;
+}
+}while(true)
