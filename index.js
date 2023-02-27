@@ -11,11 +11,11 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 const Employee = require("./lib/Employee");
 
-const emailRegex1= "\A[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@↵(?:[A-Z0-9-]+\.)+[A-Z]{2,6}\Z";
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const idRegex = /^MG\d{4}$/;
-const nameRegex = /^[a-zA-Z\s]*$/;
-const phnnoRegex= /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;//reg expression for email id
+const idRegex = /^[0-9]{4}$/;//accepts only 4 digits id
+const nameRegex = /^[a-zA-Z\s]*$/;//accepts only string
+const phnnoRegex= /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;//accepts 10 digit numbers
+const githubRegex= /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;//Github username may only contain alphanumeric characters or hyphens,cannot have multiple consecutive hyphens,cannot begin or end with a hyphen,Maximum is 39 characters.
 
 
 let team=[];
@@ -34,7 +34,7 @@ profileGenerator();
                 return true;
             }else
             {
-                return  "Please enter a valid name "
+                return  "Please enter a valid name !!"
             }
 
         }
@@ -42,12 +42,30 @@ profileGenerator();
       {
         type: 'input',
         name: 'id',
-        message: 'What is the team manager\'s employee ID?'
-      },
+        message: 'What is the team manager\'s employee ID?',
+        validate: function (input){
+            if(idRegex.test(input)){
+                return true;
+            }else
+            {
+                return  "Please enter a valid employee id(4 digits)!!! "
+            }
+
+        }
+    },
       {
         type: 'input',
         name: 'email',
-        message: 'What is the team manager\'s email address?'
+        message: 'What is the team manager\'s email address?',
+        validate: function (input){
+            if(emailRegex.test(input)){
+                return true;
+            }else
+            {
+                return  "Please enter a valid email id!! "
+            }
+
+        }
       },
       {
         type: 'input',
@@ -58,7 +76,7 @@ profileGenerator();
                 return true;
             }else
             {
-                return  "Please enter a valid number "
+                return  "Please enter a valid 10 digit phone number "
             }
 
         }
@@ -88,21 +106,57 @@ profileGenerator();
               type: "input",
               name: "name",
               message: "What is the engineer's name?",
+              validate: function (input){
+                if(nameRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid name !!"
+                }
+    
+            }
             },
             {
               type: "input",
               name: "id",
               message: "What is the engineer's employee ID?",
+              validate: function (input){
+                if(idRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid employee id(4 digits)!! "
+                }
+    
+            }
             },
             {
               type: "input",
               name: "email",
               message: "What is the engineer's email address?",
+              validate: function (input){
+                if(emailRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid email id !!"
+                }
+    
+            }
             },
             {
               type: "input",
               name: "github",
               message: "What is the engineer's GitHub username?",
+              validate: function (input){
+                if(githubRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid GitHub username!!) "
+                }
+    
+            }
             },
           ]).then((answers) => {
             const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);//create an Engineer object
@@ -118,21 +172,57 @@ profileGenerator();
               type: "input",
               name: "name",
               message: "What is the intern's name?",
+              validate: function (input){
+                if(nameRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid name "
+                }
+    
+            }
             },
             {
               type: "input",
               name: "id",
               message: "What is the intern's employee ID?",
+              validate: function (input){
+                if(idRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid employee id(4 digits) "
+                }
+    
+            }
             },
             {
               type: "input",
               name: "email",
               message: "What is the intern's email address?",
+              validate: function (input){
+                if(emailRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid email id!! "
+                }
+    
+            }
             },
             {
               type: "input",
               name: "school",
               message: "What is the name of the intern's school?",
+              validate: function (input){
+                if(nameRegex.test(input)){
+                    return true;
+                }else
+                {
+                    return  "Please enter a valid school name!! "
+                }
+    
+            }
             },
           ]).then((answers) => {
             const intern= new Intern(answers.name, answers.id, answers.email, answers.school);
