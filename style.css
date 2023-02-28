@@ -16,7 +16,6 @@
         margin-right: -20px; /* adds a 20px margin to the right of each card */
       margin-top: 20px;
      min-width:330px;
-     box-shadow: 10px 10px 5px grey;
     }
       
       .card:last-child {
